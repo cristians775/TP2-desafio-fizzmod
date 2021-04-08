@@ -16,7 +16,7 @@ function objectMerge(array, tiempo) {
     if (!Array.isArray(objs)) {
       reject(INVALID_INPUT_ARRAY);
     }
-    if (!(typeof timeInSeconds === "number")) {
+    if (!(typeof timeInSeconds === "number" && timeInSeconds >= 0)) {
       reject(INVALID_INPUT_NUMBER);
     }
     setTimeout(
