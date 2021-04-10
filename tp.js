@@ -8,7 +8,7 @@ Si el callback no proporciona un tiempo válido, se devolverá 'Tiempo de entrad
 const INVALID_INPUT_ARRAY = "Array de entrada no válido";
 const INVALID_INPUT_NUMBER = "Tiempo de entrada no válido";
 const ONE_SECOND_MS = 1000;
-
+const MIN_SECOND_PERMITTED = 1
 function objectMerge(array, tiempo) {
   const timeInSeconds = tiempo(),
     objs = array();
@@ -16,7 +16,7 @@ function objectMerge(array, tiempo) {
     if (!Array.isArray(objs)) {
       reject(INVALID_INPUT_ARRAY);
     }
-    if (!(typeof timeInSeconds === "number" && timeInSeconds >= 0)) {
+    if ((typeof timeInSeconds !== "number" && timeInSeconds < MIN_SECOND_PERMITTED)) {
       reject(INVALID_INPUT_NUMBER);
     }
     setTimeout(
@@ -58,7 +58,7 @@ Nota: usá un objeto donde cada propiedad sea un argumento, y el valor el result
 function cacheFunction(cb) {
   let cache = {};
   return (param) => {
-    if (!(cache.param === param)) {
+    if (cache.param !== param) {
       cache = { cb: cb, param: param };
       cache.value = cache.cb(cache.param);
       return cache.value;
